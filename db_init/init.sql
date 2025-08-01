@@ -1,0 +1,21 @@
+CREATE TABLE Usuarios (
+  id SERIAL PRIMARY KEY,
+  nombre VARCHAR(100) NOT NULL,
+  correo VARCHAR(150) UNIQUE NOT NULL,
+  telefono VARCHAR(20) NOT NULL
+);
+
+CREATE TABLE Canchas (
+  id SERIAL PRIMARY KEY,
+  nombre VARCHAR(100) NOT NULL,
+  ubicacion VARCHAR(150) NOT NULL,
+  tipo VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Reservas (
+  id SERIAL PRIMARY KEY,
+  usuario_id INTEGER NOT NULL REFERENCES Usuarios(id),
+  cancha_id INTEGER NOT NULL REFERENCES Canchas(id),
+  fecha_inicio TIMESTAMP NOT NULL,
+  fecha_fin TIMESTAMP NOT NULL
+);
