@@ -1,0 +1,20 @@
+{
+  "name": "api_reservas_deportivas",
+  "version": "1.0.0",
+  "description": "El objetivo de esta API es gestionar un sistema de usuarios, canchas y reservas",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BlitzExp/API_Reservas_Deportivas.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BlitzExp/API_Reservas_Deportivas/issues"
+  },
+  "homepage": "https://github.com/BlitzExp/API_Reservas_Deportivas#readme"
+}
