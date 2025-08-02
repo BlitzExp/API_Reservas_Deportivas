@@ -34,7 +34,6 @@ try {
 } catch (err) {
     next(err);
 }
-    return res;
 });
 
 module.exports = usersRouter;

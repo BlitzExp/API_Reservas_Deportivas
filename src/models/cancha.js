@@ -8,7 +8,7 @@ const getAllCourts = async () => {
     return result.rows;
 };
 
-//Método para crear un nuevo usuario
+//Método para crear una nueva cancha
 const createCourt = async (data) => {
     const result = await db.query(
         `INSERT INTO Canchas (nombre, ubicacion, tipo)
