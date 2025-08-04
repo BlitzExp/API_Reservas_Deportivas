@@ -1,23 +1,38 @@
 const db = require('../db');
+const bcrypt = require('bcrypt');
 
 //Método para obtener lista de todos los usuarios
 const getAllUsers = async () => {
     const result = await db.query(
-        `SELECT * FROM Usuarios`
+        `SELECT nombre FROM Usuarios`
     );
     return result.rows;
 };
 
 //Método para crear un nuevo usuario
 const createUser = async (data) => {
+    hashed_password = await bcrypt.hash(data.password, 10);
     const result = await db.query(
-        `INSERT INTO Usuarios (nombre, correo, telefono)
-        VALUES ($1,$2,$3)`,
-        [data.nombre, data.correo, data.telefono]
+        `INSERT INTO Usuarios (nombre, password, correo, telefono)
+        VALUES ($1,$2,$3,$4)`,
+        [data.nombre, hashed_password, data.correo, data.telefono]
     );
+    return result.rows[0];
 };
 
+const getUserByEmail = async (correo) => {
+  const result = await db.query('SELECT * FROM Usuarios WHERE correo = $1', [correo]);
+  return result.rows[0];
+};
+
+const validatePassword = async (plainPassword, hashedPassword) => {
+  return await bcrypt.compare(plainPassword, hashedPassword);
+};
+
+//Exportar los métodos para uso del router
 module.exports = {
     getAllUsers,
-    createUser
+    createUser,
+    getUserByEmail,
+    validatePassword
 };

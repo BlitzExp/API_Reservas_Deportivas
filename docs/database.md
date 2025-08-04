@@ -6,7 +6,8 @@
   | Campo     | Tipo         | Descripción             | Restricciones           |  
   |-----------|--------------|-------------------------|------------------------|  
   | id        | SERIAL       | Identificador único     | PRIMARY KEY            |  
-  | nombre    | VARCHAR(100) | Nombre del usuario      | NOT NULL               |  
+  | nombre    | VARCHAR(100) | Nombre del usuario      | NOT NULL               |
+  | password  | VARCHAR(150) | Contraseña del usuario  | NOT NULL               |    
   | correo    | VARCHAR(150) | Correo electrónico      | UNIQUE, NOT NULL       |  
   | telefono  | VARCHAR(20)  | Número de teléfono      | NOT NULL               |  
 
@@ -14,7 +15,7 @@
   | Campo      | Tipo         | Descripción             | Restricciones           |  
   |------------|--------------|-------------------------|------------------------|  
   | id         | SERIAL       | Identificador único     | PRIMARY KEY            |  
-  | nombre     | VARCHAR(100) | Nombre de la cancha     | NOT NULL               |  
+  | nombre     | VARCHAR(100) | Nombre de la cancha     | UNIQUE, NOT NULL       |  
   | ubicacion  | VARCHAR(150) | Ubicación física        | NOT NULL               |  
   | tipo       | VARCHAR(50)  | Tipo de cancha          | NOT NULL               |  
 

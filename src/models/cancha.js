@@ -15,6 +15,7 @@ const createCourt = async (data) => {
         VALUES ($1,$2,$3)`,
         [data.nombre, data.ubicacion, data.tipo]
     );
+    return result.rows[0];
 };
 
 //Exportar los métodos para uso del router

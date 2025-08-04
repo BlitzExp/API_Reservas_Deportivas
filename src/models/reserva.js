@@ -17,14 +17,15 @@ const createSchedule = async (data) => {
         `CALL insert_schedule($1,$2,$3,$4)`,
         [data.usuario_id, data.cancha_id, data.fecha_inicio, data.fecha_fin]
     );
+    return result.rows[0];
 };
 
 const deleteSchedule = async (reserva_id) => {
-    const result = await db.query(
-        `DELETE FROM RESERVAS
-        WHERE id = $1`,
-        [reserva_id]
-    );
+  const result = await db.query(
+    `DELETE FROM Reservas WHERE id = $1`,
+    [reserva_id]
+  );
+  return result.rowCount;
 };
 
 //Exportar los métodos para uso del router
