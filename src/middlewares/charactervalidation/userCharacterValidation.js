@@ -25,6 +25,7 @@ const validateBodyArgsRegister = (req, res, next) => {
   next();
 };
 
+//Validación de campos correctos al intentar iniciar sesión
 const validateBodyArgsLogin = (req, res, next) => {
   const { correo, password } = req.body;
 

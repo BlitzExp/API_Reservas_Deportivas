@@ -1,5 +1,6 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
+
 const dataModel = require('../models/user');
 const characterValidator = require('../middlewares/charactervalidation/userCharacterValidation');
 

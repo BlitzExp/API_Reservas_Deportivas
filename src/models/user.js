@@ -20,11 +20,16 @@ const createUser = async (data) => {
     return result.rows[0];
 };
 
+//Obtiene el usuario si es que este existe en la base de datos según el correo
 const getUserByEmail = async (correo) => {
-  const result = await db.query('SELECT * FROM Usuarios WHERE correo = $1', [correo]);
+  const result = await db.query(
+    `SELECT * FROM Usuarios 
+    WHERE correo = $1`, 
+    [correo]);
   return result.rows[0];
 };
 
+//Valida la contraseña comparando la de la base de datos con la ingresada por el usuario
 const validatePassword = async (plainPassword, hashedPassword) => {
   return await bcrypt.compare(plainPassword, hashedPassword);
 };
