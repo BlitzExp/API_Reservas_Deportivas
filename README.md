@@ -18,13 +18,13 @@ El objetivo de esta API RESTFUL es gestionar un sistema de usuarios, canchas y r
 3. Crea el archivo `.env` con base al archivo `.env.example`.
    - Copia el archivo `.env.example`.
    - Renómbralo a `.env`.
-4. Crea el archivo `.env` con base al archivo `.env.example`.
-   - Copia el archivo `.env.example`.
-   - Renómbralo a `.env`.
    - Llena los valores requeridos según tu entorno.
-     - El apartado de **`DB_HOST`** debe ser `db`.
      - Asegúrate de no dejar campos vacíos.
-5. Corre el contenedor de Docker:
+5. Corre el comando:
+    ```bash
+    npm install
+    ```
+4. Corre el contenedor de Docker:
     ```bash
     docker-compose up
     ```
