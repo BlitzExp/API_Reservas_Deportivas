@@ -36,7 +36,7 @@ const validateBodyArgsLogin = (req, res, next) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   if (typeof correo !== 'string' || !emailRegex.test(correo)) {
-    return res.status(400).json({ error: 'Invalid argument: correo must be a non-empty alphabetic string' });
+    return res.status(400).json({ error: 'Invalid argument:correo must be a valid email address' });
   }
 
   next();

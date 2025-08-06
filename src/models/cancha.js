@@ -3,7 +3,7 @@ const db = require('../db');
 //Método para obtener lista de todas las canchas
 const getAllCourts = async () => {
     const result = await db.query(
-        `SELECT nombre, ubicacion, tipo FROM Canchas`
+        `SELECT id AS cancha_id,nombre, ubicacion, tipo FROM Canchas`
     );
     return result.rows;
 };

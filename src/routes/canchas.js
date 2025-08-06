@@ -1,23 +1,37 @@
 const express = require('express');
 const dataModel = require('../models/cancha');
 
+const characterValidator = require('../middlewares/charactervalidation/courtCharacterValidation');
+
 //Creación del Router
 const canchasRouter = express.Router();
 
-//Validación de campos correctos al crear usuario
-const validateBodyArgs = (req, res, next) => {
-    const { nombre, ubicacion, tipo} = req.body;
-
-    if (nombre && ubicacion && tipo) {
-      return next();
-    }
-
-    const error = new Error('Invalidate arguments nombre, ubicacion and tipo are required');
-    error.status = 400;
-    next(error);
-};
-
-//Get para obtener la lista de usuarios
+/**
+ * @swagger
+ * /courts:
+ *   get:
+ *     summary: Obtiene una lista de canchas registradas
+ *     tags:
+ *       - Canchas
+ *     responses:
+ *       200:
+ *         description: Devuelve la lista de usuarios
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   cancha_id:
+ *                     type: integer
+ *                   nombre:
+ *                     type: string
+ *                   ubicacion:
+ *                     type: string
+ *                   tipo:
+ *                     type: string
+ */
 canchasRouter.get('/', async (req, res, next) => {
     try {
     const result = await dataModel.getAllCourts();
@@ -28,8 +42,50 @@ canchasRouter.get('/', async (req, res, next) => {
     return res;
 });
 
-//Post para crear un usuario
-canchasRouter.post('/', validateBodyArgs, async (req, res, next) => {
+/**
+ * @swagger
+ * /courts:
+ *   post:
+ *     summary: Permite a cualquier usuario registrar una cancha
+ *     tags:
+ *       - Canchas
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               nombre:
+ *                 type: string
+ *               ubicacion:
+ *                 type: string
+ *               tipo:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Devuelve la cancha creada
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                   example: 7
+ *                 nombre:
+ *                   type: string
+ *                   example: Cancha Los Arbustos
+ *                 ubicacion:
+ *                   type: string
+ *                   example: Lomas Verdes 32, GDL
+ *                 tipo:
+ *                   type: string
+ *                   example: futbol
+ *       400:
+ *         description: Invalidate arguments nombre, ubicacion and tipo are required
+ */
+canchasRouter.post('/', characterValidator.validateBodyArgs, async (req, res, next) => {
     try {
     const result = await dataModel.createCourt(req.body);
     res.status(200).json(result);
