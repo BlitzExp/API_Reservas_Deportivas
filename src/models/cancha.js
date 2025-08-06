@@ -12,7 +12,8 @@ const getAllCourts = async () => {
 const createCourt = async (data) => {
     const result = await db.query(
         `INSERT INTO Canchas (nombre, ubicacion, tipo)
-        VALUES ($1,$2,$3)`,
+        VALUES ($1,$2,$3)
+        RETURNING *`,
         [data.nombre, data.ubicacion, data.tipo]
     );
     return result.rows[0];

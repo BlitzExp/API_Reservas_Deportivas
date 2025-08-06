@@ -40,7 +40,7 @@ usersRouter.get('/', async (req, res, next) => {
 
 /**
  * @swagger
- * /usuarios/register:
+ * /usuario/register:
  *   post:
  *     summary: Crea un nuevo usuario
  *     tags:

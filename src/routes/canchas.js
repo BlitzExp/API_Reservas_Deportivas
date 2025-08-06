@@ -2,6 +2,7 @@ const express = require('express');
 const dataModel = require('../models/cancha');
 
 const characterValidator = require('../middlewares/charactervalidation/courtCharacterValidation');
+const authenticator = require('../middlewares/authMiddlewares/reservasAuthMiddleware');
 
 //Creación del Router
 const canchasRouter = express.Router();
@@ -49,6 +50,8 @@ canchasRouter.get('/', async (req, res, next) => {
  *     summary: Permite a cualquier usuario registrar una cancha
  *     tags:
  *       - Canchas
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -84,8 +87,12 @@ canchasRouter.get('/', async (req, res, next) => {
  *                   example: futbol
  *       400:
  *         description: Invalidate arguments nombre, ubicacion and tipo are required
+ *       401:
+ *         description: Access token required
+ *       403:
+ *         description: Invalid or expired token
  */
-canchasRouter.post('/', characterValidator.validateBodyArgs, async (req, res, next) => {
+canchasRouter.post('/', authenticator.authenticateToken, characterValidator.validateBodyArgs, async (req, res, next) => {
     try {
     const result = await dataModel.createCourt(req.body);
     res.status(200).json(result);
